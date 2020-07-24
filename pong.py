@@ -79,6 +79,8 @@ class Pong(arcade.Window):
         self.player0 = Player(0, self.lpaddle)
         self.player1 = Player(1, self.rpaddle)
         self.curr_screen = 0 # 0: main menu - 1: playing - 2: paused
+        self.key_w_pressed = 0
+        self.key_s_pressed = 0
         self.key_up_pressed = 0
         self.key_down_pressed = 0
         self.is_playing_against_bot = 0
@@ -105,7 +107,7 @@ class Pong(arcade.Window):
             self.rpaddle.render(deltaTime)
 
     def update_paddles(self, deltaTime):
-        self.player0.move_paddle_key(deltaTime, self.key_up_pressed, self.key_down_pressed)
+        self.player0.move_paddle_key(deltaTime, self.key_w_pressed, self.key_s_pressed)
         self.player0.paddle.position[1] = clamp(self.player0.paddle.position[1], 0, self.height)
         if self.is_playing_against_bot:
             self.player1.paddle.position[1] = self.ball.position[1]
@@ -163,6 +165,10 @@ class Pong(arcade.Window):
             self.key_up_pressed = 1
         elif key == arcade.key.DOWN:
             self.key_down_pressed = 1
+        elif key == arcade.key.W:
+            self.key_w_pressed = 1
+        elif key == arcade.key.S:
+            self.key_s_pressed = 1
         elif key == arcade.key.SPACE:
             if self.curr_screen == 1:
                 self.curr_screen = 2
@@ -179,9 +185,13 @@ class Pong(arcade.Window):
             self.key_up_pressed = 0
         elif key == arcade.key.DOWN:
             self.key_down_pressed = 0
+        elif key == arcade.key.W:
+            self.key_w_pressed = 0
+        elif key == arcade.key.S:
+            self.key_s_pressed = 0
 
     def render_menu_screen(self, deltaTime):
-        arcade.draw_text("PRESS ARROW UP TO PLAY AGAINST YOURSELF!", self.width/2, self.height/2+8, arcade.color.WHITE, font_size=16, anchor_x="center")
+        arcade.draw_text("PRESS ARROW UP TO PLAY AGAINST A FRIEND!", self.width/2, self.height/2+8, arcade.color.WHITE, font_size=16, anchor_x="center")
         arcade.draw_text("PRESS ARROW DOWN TO PLAY AGAINST AN UNBEATABLE FOE!", self.width/2, self.height/2-32, arcade.color.WHITE, font_size=16, anchor_x="center")
 
     def render_score(self, deltaTime):
