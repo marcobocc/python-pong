@@ -13,13 +13,9 @@ pipenv run python pong.py
 
 ## How to play:
 
-**W KEY**: Move left paddle up
+**W/S KEYS**: Move left paddle up/down
 
-**S KEY**: Move left paddle down
-
-**ARROW UP**: Move right paddle up
-
-**ARROW DOWN**: Move right paddle down
+**ARROW UP/DOWN**: Move right paddle up/down
 
 **SPACE**: Pause game
 
