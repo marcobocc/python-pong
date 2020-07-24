@@ -1,7 +1,6 @@
 # Project created by Marco Bocchetti
 
 import arcade
-import os
 
 def clamp(value, lower, higher):
     return max(lower, min(value, higher))
